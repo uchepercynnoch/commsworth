@@ -77,10 +77,12 @@ class LoginPage extends Component {
           </div>
         </div>
         <div className="row">
+          <div className="col-8 mx-auto col-md-6 col-sm-4 my-1 text-center">
+            {loggingInUser && <strong>Logging in....</strong>}
+          </div>
+        </div>
+        <div className="row">
           <div className="col-8 mx-auto col-md-6 col-sm-4 mb-1">
-            {loggingInUser && (
-              <strong className="text-center mb-1">Logging in....</strong>
-            )}
             <LoginForm
               loginSchema={loginSchema}
               initialValues={initialValues}
