@@ -79,7 +79,7 @@ class LoginPage extends Component {
         <div className="row">
           <div className="col-8 mx-auto col-md-6 col-sm-4 mb-1">
             {loggingInUser && (
-              <strong className="text-center">Logging in....</strong>
+              <strong className="text-center mb-1">Logging in....</strong>
             )}
             <LoginForm
               loginSchema={loginSchema}

@@ -3,7 +3,7 @@ import {
   CREATED_PROJECT,
   ERROR_CREATING_PROJECT,
   REQUEST_ERROR,
-  clearSuccessNotification
+  CLEAR_SUCCESS_NOTIFICATION
 } from "../constants";
 
 const initialState = {
@@ -57,6 +57,7 @@ const createProjectReducer = (state = initialState, { type, payload }) => {
       errorCreatingProjects: false,
       fetchError: false
     };
+  }
   return state;
 };
 

@@ -60,15 +60,17 @@ class CreateProjectPage extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-8 mx-auto col-md-6 col-sm-4 mb-1">
-              {this.props.creatingProjects && (
-                <strong className="text-center">Creating project....</strong>
-              )}
+            <div className="col-8 mx-auto col-md-6 col-sm-4 mb-1 text-center">
+              {this.props.creatingProjects && <span>Creating project....</span>}
               {this.props.createdProjects && (
                 <div className="alert alert-success">
                   Project created successfully
                 </div>
               )}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-8 mx-auto col-md-6 col-sm-4 mb-1">
               <ProjectForm
                 projectSchema={projectSchema}
                 initialValues={initialValues}

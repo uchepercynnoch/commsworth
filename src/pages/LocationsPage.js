@@ -27,30 +27,32 @@ class LocationsPage extends Component {
             <Title text="Locations" />
           </div>
         </div>
+
         <div style={{ height: "100vh", width: "100%" }}>
-          {this.props.loadingLocations && (
-            <strong className="text-center">Loading map...</strong>
+          {this.props.loadingLocations ? (
+            <div className="text-center">Loading map...</div>
+          ) : (
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: "AIzaSyBzF5wz7Y49T9W_mkDo0jYQrYcNZh9l9W0" //should be set in .env file in production
+              }}
+              defaultCenter={this.props.center}
+              defaultZoom={this.props.zoom}
+            >
+              {/**Loop through the locations array and pass latitude and longitude as props to Marker component */}
+              {this.props.locations !== null &&
+                this.props.locations.map(data => {
+                  return (
+                    <Marker
+                      key={data.location}
+                      text={data.location}
+                      lat={data.latitude}
+                      lng={data.longitude}
+                    />
+                  );
+                })}
+            </GoogleMapReact>
           )}
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: "AIzaSyBzF5wz7Y49T9W_mkDo0jYQrYcNZh9l9W0" //should be set in .env file in production
-            }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
-          >
-            {/**Loop through the locations array and pass latitude and longitude as props to Marker component */}
-            {this.props.locations !== null &&
-              this.props.locations.map(data => {
-                return (
-                  <Marker
-                    key={data.location}
-                    text={data.location}
-                    lat={data.latitude}
-                    lng={data.longitude}
-                  />
-                );
-              })}
-          </GoogleMapReact>
         </div>
       </Fragment>
     );
