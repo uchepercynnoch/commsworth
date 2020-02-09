@@ -2,12 +2,16 @@ import { urlEnvConfig, isObjEmpty } from "../helpers";
 import jwt from "jsonwebtoken";
 const { url } = urlEnvConfig();
 
+//SAVE TOKEN TO LOCAL STORAGE
 const saveToken = token => localStorage.setItem("user", JSON.stringify(token));
 
+//GET TOKEN FROM BROWSER LOCAL STORAGE
 const getToken = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+/**THIS FUNCTION CHECKS IF TOKEN EXISTS IN THE BROWSER LOCAL STORAGE
+ * AND RETURNS TRUE IF TOKEN IS NULL AND EXPIRED  OR FALSE IF OTHERWISE*/
 const isLoggedIn = () => {
   let token = getToken();
   let decode = jwt.decode(token);
@@ -17,6 +21,7 @@ const isLoggedIn = () => {
   return token !== null && decode.exp > timeToInt;
 };
 
+//REQUEST SERVICES FOR USER LOGIN,CREATE PROJECT,LOAD PROJECT,AND LOAD LOCATION STARTS HERE
 const loginService = credentials => {
   const { email, password } = credentials;
   const query = JSON.stringify({
@@ -109,10 +114,14 @@ const loadLocationsService = () => {
     .then(handleOtherResponse);
 };
 
+//REQUEST SERVICES FOR USER LOGIN,CREATE PROJECT,LOAD PROJECT,AND LOAD LOCATION ENDS HERE
+
+//FUNCTION THAT LOGS USER OUT BY CLEARING BROWSER LOCAL STORAGE
 const logout = () => {
   localStorage.clear();
 };
 
+//FUNCTION THAT HANDLES RESPONSE FROM LOGIN REQUEST AND RETURNS AN OBJECT
 const handleLoginResponse = result => {
   const { data } = result;
   const { loginUser } = data;
@@ -121,6 +130,7 @@ const handleLoginResponse = result => {
   } else return Promise.reject(loginUser.message);
 };
 
+//FUNCTION THAT HANDLES OTHER REQUESTS AND RETURNS A DATA OBJECT
 const handleOtherResponse = result => {
   const { data } = result;
   if (!isObjEmpty(data)) {

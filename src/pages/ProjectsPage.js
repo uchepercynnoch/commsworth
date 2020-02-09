@@ -35,7 +35,9 @@ class LoadProjectPage extends Component {
                   </thead>
                   <tbody>
                     {this.props.loadingProjects && (
-                      <strong>Loading projects...</strong>
+                      <strong className="text-center">
+                        Loading projects...
+                      </strong>
                     )}
                     {this.props.projects !== null
                       ? this.props.projects.map(project => (

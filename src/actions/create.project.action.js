@@ -2,7 +2,8 @@ import {
   CREATING_PROJECT,
   CREATED_PROJECT,
   ERROR_CREATING_PROJECT,
-  REQUEST_ERROR
+  REQUEST_ERROR,
+  CLEAR_SUCCESS_NOTIFICATION
 } from "../constants";
 import { createProjectService } from "../services/user.service";
 
@@ -19,4 +20,8 @@ export const createProject = data => dispatch => {
   } catch (error) {
     dispatch({ type: REQUEST_ERROR, payload: error });
   }
+};
+
+export const clearSuccessNotification = () => dispatch => {
+  dispatch({ type: CLEAR_SUCCESS_NOTIFICATION });
 };

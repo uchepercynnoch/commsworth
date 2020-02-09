@@ -2,9 +2,15 @@ import React, { Component, Fragment } from "react";
 import * as Yup from "yup";
 import NavBar from "../components/NavBar";
 import { connect } from "react-redux";
-import { createProject } from "../actions/create.project.action";
+import {
+  createProject,
+  clearSuccessNotification
+} from "../actions/create.project.action";
+
 import ProjectForm from "../components/ProjectForm";
 import Title from "../components/Title";
+
+//Create schema shape of input fields
 const projectSchema = Yup.object().shape({
   title: Yup.string()
     .max(30, "Too long!")
@@ -34,7 +40,12 @@ class CreateProjectPage extends Component {
     }
   };
 
-  handleCreateProject = data => {
+  //Clear success notification on component unmount
+  componentWillUnmount() {
+    this.props.clearSuccessNotification();
+  }
+
+  createProject = data => {
     this.props.createProject(data);
   };
   render() {
@@ -51,7 +62,7 @@ class CreateProjectPage extends Component {
           <div className="row">
             <div className="col-8 mx-auto col-md-6 col-sm-4 mb-1">
               {this.props.creatingProjects && (
-                <strong>Creating project....</strong>
+                <strong className="text-center">Creating project....</strong>
               )}
               {this.props.createdProjects && (
                 <div className="alert alert-success">
@@ -61,7 +72,7 @@ class CreateProjectPage extends Component {
               <ProjectForm
                 projectSchema={projectSchema}
                 initialValues={initialValues}
-                handleCreateProject={this.handleCreateProject}
+                handleCreateProject={this.createProject}
               />
             </div>
           </div>
@@ -79,4 +90,7 @@ const mapStateToProps = state => ({
   status: state.createProjectReducer.status,
   error: state.createProjectReducer.error
 });
-export default connect(mapStateToProps, { createProject })(CreateProjectPage);
+export default connect(mapStateToProps, {
+  createProject,
+  clearSuccessNotification
+})(CreateProjectPage);

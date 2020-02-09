@@ -3,7 +3,7 @@ import {
   LOGGED_IN_USER,
   LOGGING_IN_USER,
   REQUEST_ERROR,
-  CLEAR_LOGIN_SUCCESS
+  CLEAR_SUCCESS_NOTIFICATION
 } from "../constants";
 
 const initialState = {
@@ -45,7 +45,7 @@ const authReducer = (state = initialState, { type, payload }) => {
       requestError: payload
     };
   }
-  if (type === CLEAR_LOGIN_SUCCESS) {
+  if (type === CLEAR_SUCCESS_NOTIFICATION) {
     return {
       ...state,
       loggingInUser: false,

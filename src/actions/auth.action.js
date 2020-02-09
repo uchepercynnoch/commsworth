@@ -3,7 +3,7 @@ import {
   REQUEST_ERROR,
   LOGGED_IN_USER,
   ERROR_LOGGING_IN_USER,
-  CLEAR_LOGIN_SUCCESS
+  CLEAR_SUCCESS_NOTIFICATION
 } from "../constants";
 import { loginService, saveToken } from "../services/user.service";
 
@@ -23,6 +23,6 @@ export const login = data => dispatch => {
   }
 };
 
-export const clearLoginSuccess = () => dispatch => {
-  dispatch({ type: CLEAR_LOGIN_SUCCESS });
+export const clearSuccessNotification = () => dispatch => {
+  dispatch({ type: CLEAR_SUCCESS_NOTIFICATION });
 };

@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import * as Yup from "yup";
 import LoginForm from "../components/LoginForm";
 import { connect } from "react-redux";
-import { login, clearLoginSuccess } from "../actions/auth.action";
+import { login, clearSuccessNotification } from "../actions/auth.action";
 import { Redirect } from "react-router-dom";
 import Title from "../components/Title";
+
 const loginSchema = Yup.object().shape({
   email: Yup.string()
     .max(55, "Too long!")
@@ -55,7 +56,7 @@ class LoginPage extends Component {
   componentWillUnmount() {
     const { isUserLoggedIn } = this.state;
     if (isUserLoggedIn) {
-      this.props.clearLoginSuccess(); //reset isUserLoggedIn to false in store
+      this.props.clearSuccessNotification(); //reset isUserLoggedIn to false in store
     }
   }
 
@@ -77,7 +78,9 @@ class LoginPage extends Component {
         </div>
         <div className="row">
           <div className="col-8 mx-auto col-md-6 col-sm-4 mb-1">
-            {loggingInUser && <strong>Logging in....</strong>}
+            {loggingInUser && (
+              <strong className="text-center">Logging in....</strong>
+            )}
             <LoginForm
               loginSchema={loginSchema}
               initialValues={initialValues}
@@ -98,6 +101,6 @@ const mapStateToProps = state => ({
   error: state.authReducer.error,
   requestError: state.authReducer.requestError
 });
-export default connect(mapStateToProps, { login, clearLoginSuccess })(
+export default connect(mapStateToProps, { login, clearSuccessNotification })(
   LoginPage
 );
