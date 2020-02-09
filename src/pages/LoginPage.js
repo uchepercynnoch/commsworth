@@ -38,6 +38,7 @@ class LoginPage extends Component {
       props.loginHasError !== state.loginHasError ||
       props.requestHasError !== state.requestHasError ||
       props.user !== state.user ||
+      props.error !== state.error ||
       props.requestError !== state.requestError
     ) {
       return {
@@ -65,7 +66,13 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { initialValues, loggingInUser, isUserLoggedIn } = this.state;
+    const {
+      initialValues,
+      loggingInUser,
+      isUserLoggedIn,
+      loginHasError,
+      error
+    } = this.state;
     if (isUserLoggedIn) {
       return <Redirect to="/home" />;
     }
@@ -79,6 +86,7 @@ class LoginPage extends Component {
         <div className="row">
           <div className="col-8 mx-auto col-md-6 col-sm-4 my-1 text-center">
             {loggingInUser && <strong>Logging in....</strong>}
+            {loginHasError && <div className="alert alert-danger">{error}</div>}
           </div>
         </div>
         <div className="row">
