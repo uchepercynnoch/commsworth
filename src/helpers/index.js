@@ -7,7 +7,7 @@ export const history = createBrowserHistory();
 export const urlEnvConfig = () => {
   if (process.env.NODE_ENV === "production") {
     return {
-      url: "/api/v1"
+      url: "https://frontendassesment20200204015954.azurewebsites.net"
     };
   }
 
