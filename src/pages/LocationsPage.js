@@ -11,7 +11,7 @@ class LocationsPage extends Component {
       lat: 9.1452808, //Current Location
       lng: 7.3293903
     },
-    zoom: 8
+    zoom: 7
   };
 
   componentDidMount() {
@@ -28,31 +28,33 @@ class LocationsPage extends Component {
           </div>
         </div>
 
-        <div style={{ height: "100vh", width: "100%" }}>
-          {this.props.loadingLocations ? (
-            <div className="text-center">Loading map...</div>
-          ) : (
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: "AIzaSyBzF5wz7Y49T9W_mkDo0jYQrYcNZh9l9W0" //should be set in .env file in production
-              }}
-              defaultCenter={this.props.center}
-              defaultZoom={this.props.zoom}
-            >
-              {/**Loop through the locations array and pass latitude and longitude as props to Marker component */}
-              {this.props.locations !== null &&
-                this.props.locations.map(data => {
-                  return (
-                    <Marker
-                      key={data.location}
-                      text={data.location}
-                      lat={data.latitude}
-                      lng={data.longitude}
-                    />
-                  );
-                })}
-            </GoogleMapReact>
-          )}
+        <div className="col-10 mx-auto col-md-8 col-sm-6 my-2">
+          <div style={{ height: "70vh", width: "100%" }}>
+            {this.props.loadingLocations ? (
+              <div className="text-center">Loading map...</div>
+            ) : (
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: "AIzaSyBzF5wz7Y49T9W_mkDo0jYQrYcNZh9l9W0" //should be set in .env file in production
+                }}
+                defaultCenter={this.props.center}
+                defaultZoom={this.props.zoom}
+              >
+                {/**Loop through the locations array and pass latitude and longitude as props to Marker component */}
+                {this.props.locations !== null &&
+                  this.props.locations.map(data => {
+                    return (
+                      <Marker
+                        key={data.location}
+                        text={data.location}
+                        lat={data.latitude}
+                        lng={data.longitude}
+                      />
+                    );
+                  })}
+              </GoogleMapReact>
+            )}
+          </div>
         </div>
       </Fragment>
     );
