@@ -113,6 +113,7 @@ export default function ProjectForm({
           <div className="form-group">
             <label htmlFor="exampleInputPassword1">End Date</label>
             <DatePicker
+              style={{ display: "block !important" }}
               selected={values.endDate}
               dateFormat="MMMM d, yyyy"
               name="endDate"
